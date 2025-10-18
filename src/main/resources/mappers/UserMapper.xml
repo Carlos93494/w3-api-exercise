@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper"> <!-- 对应映射接口全类名 -->
+
+    <!-- 分页查询用户 -->
+    <select id="getUsersByPage" parameterType="map" resultType="com.example.entity.User">
+        SELECT * FROM users LIMIT #{startIndex}, #{pageSize}
+    </select>
+
+    <!-- 查询总用户数 -->
+    <select id="getTotalUserCount" resultType="int">
+        SELECT COUNT(*) FROM users
+    </select>
+
+    <!-- 新增用户 -->
+    <insert id="addUser" parameterType="com.example.entity.User">
+        INSERT INTO users (username, password, email) VALUES (#{username}, #{password}, #{email})
+    </insert>
+
+    <!-- 根据用户名查询 -->
+    <select id="getUserByUsername" parameterType="string" resultType="com.example.entity.User">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
+</mapper>
